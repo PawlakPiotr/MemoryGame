@@ -10,7 +10,7 @@ public class LevelsActivity extends AppCompatActivity implements View.OnClickLis
 
     private final String intent_extra_level = "level";
     Button btn_4x4, btn_4x5, btn_4x6;
-    int[] values = {16, 20, 24};
+    String[] values = {"16", "20", "24"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,14 +25,10 @@ public class LevelsActivity extends AppCompatActivity implements View.OnClickLis
         btn_4x5 = findViewById(R.id.btn_4x5);
         btn_4x6 = findViewById(R.id.btn_4x6);
 
-        btn_4x4.setOnClickListener(this);
-        btn_4x5.setOnClickListener(this);
-        btn_4x6.setOnClickListener(this);
+        setButtonsListeners(new Button[]{btn_4x4, btn_4x5, btn_4x6});
     }
 
-
     private void startGame(Intent intent, String value) {
-
         intent.putExtra(intent_extra_level, value);
         startActivity(intent);
     }
@@ -41,16 +37,22 @@ public class LevelsActivity extends AppCompatActivity implements View.OnClickLis
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btn_4x4:
-                startGame(new Intent(this, GameActivity.class), "16");
+                startGame(new Intent(this, GameActivity.class), values[0]);
                 break;
             case R.id.btn_4x5:
-                startGame(new Intent(this, GameActivity.class), "20");
+                startGame(new Intent(this, GameActivity.class), values[1]);
                 break;
             case R.id.btn_4x6:
-                startGame(new Intent(this, GameActivity.class), "24");
+                startGame(new Intent(this, GameActivity.class), values[2]);
                 break;
             default:
                 break;
+        }
+    }
+
+    private void setButtonsListeners(Button[] arr) {
+        for(Button btn : arr) {
+            btn.setOnClickListener(this);
         }
     }
 }

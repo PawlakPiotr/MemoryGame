@@ -3,4 +3,7 @@
     <string name="btn_play_text">PLAY</string>
     <string name="btn_exit_text">EXIT</string>
     <string name="choose_level">Choose the level of difficulty.</string>
+    <string name="level_4x4">4x4</string>
+    <string name="level_4x5">4x5</string>
+    <string name="level_4x6">4x6</string>
 </resources>
