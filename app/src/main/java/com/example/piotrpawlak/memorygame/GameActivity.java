@@ -3,14 +3,11 @@ package com.example.piotrpawlak.memorygame;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
-import android.media.Image;
 import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Layout;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,6 +18,8 @@ import java.util.List;
 
 public class GameActivity extends AppCompatActivity {
 
+    GameBuilder gameBuilder;
+    Player p1, p2;
     private final int default_level = 16;
     int Level;
     ImageView[] arr_img;
@@ -61,7 +60,16 @@ public class GameActivity extends AppCompatActivity {
         setClickAction(img_arr);
     }
 
-    private void showCard(ImageView iv, int card) {
+    private void setUpGame() { //TODO add game mode handler
+        p1 = new Player(player1);
+        p2 = new Player(player2);
+
+        gameBuilder = new GameBuilder(2, p1, p2);
+
+        p2.p_txt_view.setTextColor(Color.GRAY);
+    }
+
+    private void showCard(ImageView iv, int card, ImageView[] img_arr) {
         if (cardsArray[card] == 101 || cardsArray[card] == 201) {
             iv.setImageResource(img101);
         } else if (cardsArray[card] == 102 || cardsArray[card] == 202) {
@@ -80,19 +88,22 @@ public class GameActivity extends AppCompatActivity {
             iv.setImageResource(img108);
         }
 
-        checkState(iv, card);
+        checkState(iv, card, img_arr);
     }
 
-    private void checkState(ImageView iv, int card) {
+    private void checkState(ImageView iv, int card, final ImageView[] img_arr) {
         if (cardNumber == 1) {
             first_card = cardsArray[card];
+
             if (first_card > 200) {
                 first_card -= 100;
             }
             cardNumber = 2;
             clicked_first = card;
         } else if (cardNumber == 2) {
+
             second_card = cardsArray[card];
+
             if (second_card > 200) {
                 second_card -= 100;
             }
@@ -105,83 +116,28 @@ public class GameActivity extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                if (cardNumber == 1) {
-                    calculate();
-                }
+            if (cardNumber == 1) {
+                calculate(img_arr);
+            }
             }
         }, 1000);
     }
 
-    private void calculate() {
-
-        if (first_card == second_card) {
-            if (clicked_first == 0) {
-               iv_11.setVisibility(View.INVISIBLE);
-            } else if (clicked_first == 1) {
-                iv_12.setVisibility(View.INVISIBLE);
-            } else if (clicked_first == 2) {
-                iv_13.setVisibility(View.INVISIBLE);
-            } else if (clicked_first == 3) {
-                iv_14.setVisibility(View.INVISIBLE);
-            } else if (clicked_first == 4) {
-                iv_21.setVisibility(View.INVISIBLE);
-            } else if (clicked_first == 5) {
-                iv_22.setVisibility(View.INVISIBLE);
-            } else if (clicked_first == 6) {
-                iv_23.setVisibility(View.INVISIBLE);
-            } else if (clicked_first == 7) {
-                iv_24.setVisibility(View.INVISIBLE);
-            } else if (clicked_first == 8) {
-                iv_31.setVisibility(View.INVISIBLE);
-            } else if (clicked_first == 9) {
-                iv_32.setVisibility(View.INVISIBLE);
-            } else if (clicked_first == 10) {
-                iv_33.setVisibility(View.INVISIBLE);
-            } else if (clicked_first == 11) {
-                iv_34.setVisibility(View.INVISIBLE);
-            } else if (clicked_first == 12) {
-                iv_41.setVisibility(View.INVISIBLE);
-            } else if (clicked_first == 13) {
-                iv_42.setVisibility(View.INVISIBLE);
-            } else if (clicked_first == 14) {
-                iv_43.setVisibility(View.INVISIBLE);
-            } else if (clicked_first == 15) {
-                iv_44.setVisibility(View.INVISIBLE);
+    private void setVisibility(ImageView[] arr, int clicked) {
+        for (int i = 0; i< arr.length; i++) {
+            if (clicked == i) {
+                arr[i].setVisibility(View.INVISIBLE);
             }
+        }
+    }
 
-            if (clicked_second == 0) {
-                iv_11.setVisibility(View.INVISIBLE);
-            } else if (clicked_second == 1) {
-                iv_12.setVisibility(View.INVISIBLE);
-            } else if (clicked_second == 2) {
-                iv_13.setVisibility(View.INVISIBLE);
-            } else if (clicked_second == 3) {
-                iv_14.setVisibility(View.INVISIBLE);
-            } else if (clicked_second == 4) {
-                iv_21.setVisibility(View.INVISIBLE);
-            } else if (clicked_second == 5) {
-                iv_22.setVisibility(View.INVISIBLE);
-            } else if (clicked_second == 6) {
-                iv_23.setVisibility(View.INVISIBLE);
-            } else if (clicked_second == 7) {
-                iv_24.setVisibility(View.INVISIBLE);
-            } else if (clicked_second == 8) {
-                iv_31.setVisibility(View.INVISIBLE);
-            } else if (clicked_second == 9) {
-                iv_32.setVisibility(View.INVISIBLE);
-            } else if (clicked_second == 10) {
-                iv_33.setVisibility(View.INVISIBLE);
-            } else if (clicked_second == 11) {
-                iv_34.setVisibility(View.INVISIBLE);
-            } else if (clicked_second == 12) {
-                iv_41.setVisibility(View.INVISIBLE);
-            } else if (clicked_second == 13) {
-                iv_42.setVisibility(View.INVISIBLE);
-            } else if (clicked_second == 14) {
-                iv_43.setVisibility(View.INVISIBLE);
-            } else if (clicked_second == 15) {
-                iv_44.setVisibility(View.INVISIBLE);
-            }
+    private void calculatePoints(int mode) {
+        if (mode == 1) {
+
+            p1_points++;
+            player1.setText("POINTS: " + p1_points);
+
+        } else if (mode == 2) {
 
             if (turn == 1) {
                 p1_points++;
@@ -190,6 +146,17 @@ public class GameActivity extends AppCompatActivity {
                 p2_points++;
                 player2.setText("P2: " + p2_points);
             }
+        }
+    }
+
+    private void calculate(ImageView[] img_arr) {
+
+        if (first_card == second_card) {
+
+            setVisibility(img_arr, clicked_first);
+            setVisibility(img_arr, clicked_second);
+            calculatePoints(2); // TODO game mode handler
+
         } else {
             turnCards(arr_img);
 
@@ -207,28 +174,28 @@ public class GameActivity extends AppCompatActivity {
         checkWinner();
     }
 
+    private boolean checkVisibility(ImageView[] arr) {
+        List<Boolean> state = new ArrayList<Boolean>();
+        for (ImageView iv : arr) {
+            if (iv.getVisibility() == View.INVISIBLE) {
+                state.add(true);
+            } else {
+                state.add(false);
+            }
+        }
+
+        return !state.contains(Boolean.valueOf(false));
+    }
+
     private void checkWinner() {
-        if(iv_11.getVisibility() == View.INVISIBLE && iv_12.getVisibility() == View.INVISIBLE &&
-                iv_13.getVisibility() == View.INVISIBLE && iv_14.getVisibility() == View.INVISIBLE &&
-                iv_21.getVisibility() == View.INVISIBLE && iv_22.getVisibility() == View.INVISIBLE &&
-                iv_23.getVisibility() == View.INVISIBLE && iv_24.getVisibility() == View.INVISIBLE &&
-                iv_31.getVisibility() == View.INVISIBLE && iv_32.getVisibility() == View.INVISIBLE &&
-                iv_33.getVisibility() == View.INVISIBLE && iv_34.getVisibility() == View.INVISIBLE &&
-                iv_41.getVisibility() == View.INVISIBLE && iv_42.getVisibility() == View.INVISIBLE &&
-                iv_43.getVisibility() == View.INVISIBLE && iv_44.getVisibility() == View.INVISIBLE
-        ){
+        ImageView[] img_arr = {iv_11, iv_12, iv_13, iv_14, iv_21, iv_22, iv_23, iv_24,
+                iv_31, iv_32, iv_33, iv_34, iv_41, iv_42, iv_43, iv_44};
+
+        if(checkVisibility(img_arr)){
             AlertDialog.Builder winner = new AlertDialog.Builder(GameActivity.this);
 
-            String win;
-            if(p1_points > p2_points) {
-                win = "WON PLAYER 1";
-            } else if (p1_points < p2_points) {
-                win = "WON PLAYER 2";
-            } else {
-                win = "DRAW!";
-            }
 
-            winner.setMessage("GAME OVER! " + win).setCancelable(false)
+            winner.setMessage(setUpWinnerInformation(2)).setCancelable(false)
                     .setPositiveButton("NEW GAME", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -247,6 +214,24 @@ public class GameActivity extends AppCompatActivity {
             AlertDialog alert = winner.create();
             alert.show();
         }
+    }
+
+    private String setUpWinnerInformation(int mode) {
+        String winner_msg = "GAME OVER! ";
+
+        if (mode == 1) {
+            winner_msg += "YOU WIN!";
+        } else {
+            if(p1_points > p2_points) {
+                winner_msg += "WON PLAYER 1";
+            } else if (p1_points < p2_points) {
+                winner_msg += "WON PLAYER 2";
+            } else {
+                winner_msg += "DRAW!";
+            }
+        }
+
+        return winner_msg;
     }
 
     private void setComponents(int level) {
@@ -311,14 +296,14 @@ public class GameActivity extends AppCompatActivity {
 
     }
 
-    private void setClickAction(ImageView[] arr) {
+    private void setClickAction(final ImageView[] arr) {
 
         for (final ImageView img_view : arr) {
             img_view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int card = Integer.parseInt((String) v.getTag());
-                    showCard(img_view, card);
+                    showCard(img_view, card, arr);
                 }
             });
         }
