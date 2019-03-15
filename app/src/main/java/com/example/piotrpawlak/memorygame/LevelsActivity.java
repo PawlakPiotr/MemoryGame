@@ -8,6 +8,7 @@ import android.widget.Button;
 
 public class LevelsActivity extends AppCompatActivity implements View.OnClickListener {
 
+    private String mode;
     private final String intent_extra_level = "level";
     Button btn_4x4, btn_4x5, btn_4x6;
     String[] values = {"16", "20", "24"};
@@ -16,6 +17,8 @@ public class LevelsActivity extends AppCompatActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_levels);
+
+        mode = getIntent().getStringExtra("mode");
 
         setComponents();
     }
@@ -30,6 +33,7 @@ public class LevelsActivity extends AppCompatActivity implements View.OnClickLis
 
     private void startGame(Intent intent, String value) {
         intent.putExtra(intent_extra_level, value);
+        intent.putExtra("mode", mode);
         startActivity(intent);
     }
 

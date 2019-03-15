@@ -21,7 +21,7 @@ public class GameActivity extends AppCompatActivity {
     GameBuilder gameBuilder;
     Player p1, p2;
     private final int default_level = 16;
-    int Level;
+    int Level, Mode;
     ImageView[] arr_img;
 
     TextView player1, player2;
@@ -46,6 +46,7 @@ public class GameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game);
 
         Level = getIntent().hasExtra("level") ? Integer.parseInt(getIntent().getStringExtra("level")) : default_level;
+        Mode = Integer.parseInt(getIntent().getStringExtra("mode"));
 
         setComponents(Level);
         setCards();
@@ -64,7 +65,7 @@ public class GameActivity extends AppCompatActivity {
         p1 = new Player(player1);
         p2 = new Player(player2);
 
-        gameBuilder = new GameBuilder(2, p1, p2);
+        gameBuilder = new GameBuilder(Mode, p1, p2);
 
         p2.p_txt_view.setTextColor(Color.GRAY);
     }
@@ -87,6 +88,8 @@ public class GameActivity extends AppCompatActivity {
         } else if (cardsArray[card] == 108 || cardsArray[card] == 208) {
             iv.setImageResource(img108);
         }
+
+        iv.setEnabled(false);
 
         checkState(iv, card, img_arr);
     }
@@ -155,11 +158,23 @@ public class GameActivity extends AppCompatActivity {
 
             setVisibility(img_arr, clicked_first);
             setVisibility(img_arr, clicked_second);
-            calculatePoints(2); // TODO game mode handler
+            calculatePoints(Mode);
 
         } else {
             turnCards(arr_img);
 
+            for (ImageView iv : img_arr) {
+                iv.setEnabled(true);
+            }
+
+            changePlayer();
+        }
+
+        checkWinner();
+    }
+
+    private void changePlayer() {
+        if (Mode == 2) {
             if (turn == 1) {
                 turn = 2;
                 player2.setTextColor(Color.BLACK);
@@ -170,8 +185,6 @@ public class GameActivity extends AppCompatActivity {
                 player2.setTextColor(Color.GRAY);
             }
         }
-
-        checkWinner();
     }
 
     private boolean checkVisibility(ImageView[] arr) {
@@ -195,7 +208,7 @@ public class GameActivity extends AppCompatActivity {
             AlertDialog.Builder winner = new AlertDialog.Builder(GameActivity.this);
 
 
-            winner.setMessage(setUpWinnerInformation(2)).setCancelable(false)
+            winner.setMessage(setUpWinnerInformation(Mode)).setCancelable(false)
                     .setPositiveButton("NEW GAME", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -237,6 +250,9 @@ public class GameActivity extends AppCompatActivity {
     private void setComponents(int level) {
         player1 = findViewById(R.id.txt_player1);
         player2 = findViewById(R.id.txt_player2);
+
+        player1.setText(Mode == 1 ? "POINTS" : "P1: 0");
+        player2.setText(Mode == 1 ? "" : "P2: 0");
 
         setImages(level);
     }

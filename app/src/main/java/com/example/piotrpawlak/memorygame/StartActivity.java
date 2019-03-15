@@ -16,10 +16,10 @@ public class StartActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
 
-        final Intent levels_activity = new Intent(this, LevelsActivity.class);
+        final Intent mode_activity = new Intent(this, ModeActivity.class);
 
         setComponents();
-        levels(levels_activity);
+        mode(mode_activity);
         exit();
     }
 
@@ -28,7 +28,7 @@ public class StartActivity extends AppCompatActivity {
         btn_play = findViewById(R.id.btn_play);
     }
 
-    private void levels(final Intent intent) {
+    private void mode(final Intent intent) {
         btn_play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
