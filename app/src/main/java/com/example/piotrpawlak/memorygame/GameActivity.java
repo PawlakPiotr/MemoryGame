@@ -21,7 +21,7 @@ public class GameActivity extends AppCompatActivity {
     GameBuilder gameBuilder;
     Player p1, p2;
     private final int default_level = 16;
-    int Level, Mode;
+    int Level, Mode, counter;
     ImageView[] arr_img;
 
     TextView player1, player2;
@@ -49,6 +49,7 @@ public class GameActivity extends AppCompatActivity {
         Mode = Integer.parseInt(getIntent().getStringExtra("mode"));
 
         setComponents(Level);
+        setUpGame();
         setCards();
 
         Collections.shuffle(Arrays.asList(cardsArray));
@@ -91,6 +92,11 @@ public class GameActivity extends AppCompatActivity {
 
         iv.setEnabled(false);
 
+        if (cardNumber == 2) {
+            enableCards(img_arr, false);
+        }
+
+        gameBuilder.countMove();
         checkState(iv, card, img_arr);
     }
 
@@ -136,9 +142,10 @@ public class GameActivity extends AppCompatActivity {
 
     private void calculatePoints(int mode) {
         if (mode == 1) {
-
-            p1_points++;
-            player1.setText("POINTS: " + p1_points);
+            if (cardNumber == 1) {
+                p1_points++;
+                player1.setText("POINTS: " + p1_points);
+            }
 
         } else if (mode == 2) {
 
@@ -152,6 +159,12 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
+    private void enableCards(ImageView[] img_arr, boolean enable) {
+        for (ImageView iv : img_arr) {
+            iv.setEnabled(enable);
+        }
+    }
+
     private void calculate(ImageView[] img_arr) {
 
         if (first_card == second_card) {
@@ -159,14 +172,11 @@ public class GameActivity extends AppCompatActivity {
             setVisibility(img_arr, clicked_first);
             setVisibility(img_arr, clicked_second);
             calculatePoints(Mode);
+            enableCards(img_arr, true);
 
         } else {
             turnCards(arr_img);
-
-            for (ImageView iv : img_arr) {
-                iv.setEnabled(true);
-            }
-
+            enableCards(img_arr, true);
             changePlayer();
         }
 
@@ -213,6 +223,8 @@ public class GameActivity extends AppCompatActivity {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             final Intent new_game = new Intent(getApplicationContext(), GameActivity.class);
+                            new_game.putExtra("mode", String.valueOf(Mode));
+                            new_game.putExtra("level", String.valueOf(Level));
                             startActivity(new_game);
                         }
                     })
@@ -233,7 +245,7 @@ public class GameActivity extends AppCompatActivity {
         String winner_msg = "GAME OVER! ";
 
         if (mode == 1) {
-            winner_msg += "YOU WIN!";
+            winner_msg += "YOU WIN! \nNumber of tries: " + gameBuilder.getCounter();
         } else {
             if(p1_points > p2_points) {
                 winner_msg += "WON PLAYER 1";
