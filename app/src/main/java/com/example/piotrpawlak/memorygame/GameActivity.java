@@ -121,14 +121,14 @@ public class GameActivity extends AppCompatActivity {
         }
 
         Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-            if (cardNumber == 1) {
-                calculate(img_arr);
-            }
-            }
-        }, 1000);
+        if (cardNumber == 1) {
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    calculate(img_arr);
+                }
+            }, 1000);
+        }
     }
 
     private void setVisibility(ImageView[] arr, int clicked) {
