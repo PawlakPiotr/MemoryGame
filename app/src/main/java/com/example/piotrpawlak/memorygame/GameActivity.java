@@ -20,12 +20,13 @@ public class GameActivity extends AppCompatActivity {
 
     GameBuilder gameBuilder;
     Player p1, p2;
+
+    String time;
     private final int default_level = 16;
-    int Level, Mode, counter;
+    int Level, Mode;
+
     ImageView[] arr_img;
-
     TextView player1, player2;
-
     ImageView iv_11, iv_12, iv_13, iv_14, iv_21, iv_22, iv_23, iv_24,
                     iv_31, iv_32, iv_33, iv_34, iv_41, iv_42, iv_43, iv_44;
 
@@ -62,7 +63,7 @@ public class GameActivity extends AppCompatActivity {
         setClickAction(img_arr);
     }
 
-    private void setUpGame() { //TODO add game mode handler
+    private void setUpGame() {
         p1 = new Player(player1);
         p2 = new Player(player2);
 
@@ -233,6 +234,7 @@ public class GameActivity extends AppCompatActivity {
                 public void onClick(DialogInterface dialog, int which) {
                     final Intent exit = new Intent(getApplicationContext(), StartActivity.class);
                     startActivity(exit);
+                    finish();
                 }
             });
 
@@ -242,17 +244,17 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private String setUpWinnerInformation(int mode) {
-        String winner_msg = "GAME OVER! ";
+        String winner_msg = getString(R.string.game_over) + " ";
 
         if (mode == 1) {
-            winner_msg += "YOU WIN! \nNumber of tries: " + gameBuilder.getCounter();
+            winner_msg += getString(R.string.winner) + "\n\nNumber of tries: " + gameBuilder.getCounter();
         } else {
             if(p1_points > p2_points) {
-                winner_msg += "WON PLAYER 1";
+                winner_msg += getString(R.string.player_one_win);
             } else if (p1_points < p2_points) {
-                winner_msg += "WON PLAYER 2";
+                winner_msg += getString(R.string.player_two_win);
             } else {
-                winner_msg += "DRAW!";
+                winner_msg += getString(R.string.draw);
             }
         }
 
@@ -263,8 +265,26 @@ public class GameActivity extends AppCompatActivity {
         player1 = findViewById(R.id.txt_player1);
         player2 = findViewById(R.id.txt_player2);
 
-        player1.setText(Mode == 1 ? "POINTS" : "P1: 0");
-        player2.setText(Mode == 1 ? "" : "P2: 0");
+        player1.setText(Mode == 1 ? getString(R.string.one_player_mode_points) : getString(R.string.player_one_points));
+        player2.setText(Mode == 1 ? "" : getString(R.string.player_two_points));
+
+        View v_4x4 = findViewById(R.id.include_4x4);
+        View v_4x5 = findViewById(R.id.include_4x5);
+        View v_4x6 = findViewById(R.id.include_4x6);
+
+        if(Level == 16) {
+            v_4x4.setVisibility(View.VISIBLE);
+            v_4x5.setVisibility(View.GONE);
+            v_4x6.setVisibility(View.GONE);
+        } else if(Level == 20) {
+            v_4x4.setVisibility(View.GONE);
+            v_4x5.setVisibility(View.VISIBLE);
+            v_4x6.setVisibility(View.GONE);
+        } else if (Level == 24) {
+            v_4x4.setVisibility(View.GONE);
+            v_4x5.setVisibility(View.GONE);
+            v_4x6.setVisibility(View.VISIBLE);
+        }
 
         setImages(level);
     }
@@ -330,6 +350,7 @@ public class GameActivity extends AppCompatActivity {
             img_view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    System.out.println("### HALKO");
                     int card = Integer.parseInt((String) v.getTag());
                     showCard(img_view, card, arr);
                 }

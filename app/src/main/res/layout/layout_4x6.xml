@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:weightSum="3">
+
+    <LinearLayout
+        android:id="@+id/row_6"
+        android:layout_width="match_parent"
+        android:layout_height="102dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:orientation="horizontal"
+        android:weightSum="4"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/row_5"
+        app:layout_constraintVertical_bias="0.042">
+
+        <ImageView
+            android:id="@+id/iv_61"
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:scaleType="centerInside"
+            android:src="@drawable/card" />
+
+        <ImageView
+            android:id="@+id/iv_62"
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:scaleType="centerInside"
+            android:src="@drawable/card" />
+
+        <ImageView
+            android:id="@+id/iv_63"
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:scaleType="centerInside"
+            android:src="@drawable/card" />
+
+        <ImageView
+            android:id="@+id/iv_64"
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:scaleType="centerInside"
+            android:src="@drawable/card" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/row_5"
+        android:layout_width="match_parent"
+        android:layout_height="88dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:orientation="horizontal"
+        android:weightSum="4"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/row_4"
+        app:layout_constraintVertical_bias="0.049">
+
+        <ImageView
+            android:id="@+id/iv_51"
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:scaleType="centerInside"
+            android:src="@drawable/card" />
+
+        <ImageView
+            android:id="@+id/iv_52"
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:scaleType="centerInside"
+            android:src="@drawable/card" />
+
+        <ImageView
+            android:id="@+id/iv_53"
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:scaleType="centerInside"
+            android:src="@drawable/card" />
+
+        <ImageView
+            android:id="@+id/iv_54"
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:scaleType="centerInside"
+            android:src="@drawable/card" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/row_1"
+        android:layout_width="match_parent"
+        android:layout_height="88dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:orientation="horizontal"
+        android:weightSum="4"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.034">
+
+        <ImageView
+            android:id="@+id/iv_11"
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:scaleType="centerInside"
+            android:src="@drawable/card" />
+
+        <ImageView
+            android:id="@+id/iv_12"
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:scaleType="centerInside"
+            android:src="@drawable/card" />
+
+        <ImageView
+            android:id="@+id/iv_13"
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:scaleType="centerInside"
+            android:src="@drawable/card" />
+
+        <ImageView
+            android:id="@+id/iv_14"
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:scaleType="centerInside"
+            android:src="@drawable/card" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/row_2"
+        android:layout_width="match_parent"
+        android:layout_height="82dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:orientation="horizontal"
+        android:weightSum="4"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/row_1"
+        app:layout_constraintVertical_bias="0.013">
+
+        <ImageView
+            android:id="@+id/iv_21"
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:scaleType="centerInside"
+            android:src="@drawable/card" />
+
+        <ImageView
+            android:id="@+id/iv_22"
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:scaleType="centerInside"
+            android:src="@drawable/card" />
+
+        <ImageView
+            android:id="@+id/iv_23"
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:scaleType="centerInside"
+            android:src="@drawable/card" />
+
+        <ImageView
+            android:id="@+id/iv_24"
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:scaleType="centerInside"
+            android:src="@drawable/card" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/row_3"
+        android:layout_width="match_parent"
+        android:layout_height="83dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:orientation="horizontal"
+        android:weightSum="4"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/row_2"
+        app:layout_constraintVertical_bias="0.019">
+
+        <ImageView
+            android:id="@+id/iv_31"
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:scaleType="centerInside"
+            android:src="@drawable/card" />
+
+        <ImageView
+            android:id="@+id/iv_32"
+            android:layout_width="wrap_content"
+            android:layout_height="75dp"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:scaleType="centerInside"
+            android:src="@drawable/card" />
+
+        <ImageView
+            android:id="@+id/iv_33"
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:scaleType="centerInside"
+            android:src="@drawable/card" />
+
+        <ImageView
+            android:id="@+id/iv_34"
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:scaleType="centerInside"
+            android:src="@drawable/card" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/row_4"
+        android:layout_width="match_parent"
+        android:layout_height="88dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:orientation="horizontal"
+        android:weightSum="4"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/row_3"
+        app:layout_constraintVertical_bias="0.054">
+
+        <ImageView
+            android:id="@+id/iv_41"
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:scaleType="centerInside"
+            android:src="@drawable/card" />
+
+        <ImageView
+            android:id="@+id/iv_42"
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:scaleType="centerInside"
+            android:src="@drawable/card" />
+
+        <ImageView
+            android:id="@+id/iv_43"
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:scaleType="centerInside"
+            android:src="@drawable/card" />
+
+        <ImageView
+            android:id="@+id/iv_44"
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:scaleType="centerInside"
+            android:src="@drawable/card" />
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>
