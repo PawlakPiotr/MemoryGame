@@ -21,8 +21,6 @@ public class GameActivity extends AppCompatActivity {
     GameBuilder gameBuilder;
     Player p1, p2;
 
-    String time;
-    private final int default_level = 16;
     int Level, Mode;
 
     ImageView[] arr_img;
@@ -46,7 +44,7 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        Level = getIntent().hasExtra("level") ? Integer.parseInt(getIntent().getStringExtra("level")) : default_level;
+        Level = Integer.parseInt(getIntent().getStringExtra("level"));
         Mode = Integer.parseInt(getIntent().getStringExtra("mode"));
 
         setComponents(Level);
@@ -220,7 +218,7 @@ public class GameActivity extends AppCompatActivity {
 
 
             winner.setMessage(setUpWinnerInformation(Mode)).setCancelable(false)
-                    .setPositiveButton("NEW GAME", new DialogInterface.OnClickListener() {
+                    .setPositiveButton(R.string.new_game, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             final Intent new_game = new Intent(getApplicationContext(), GameActivity.class);
@@ -229,7 +227,7 @@ public class GameActivity extends AppCompatActivity {
                             startActivity(new_game);
                         }
                     })
-            .setNegativeButton("EXIT", new DialogInterface.OnClickListener() {
+            .setNegativeButton(R.string.exit_app, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     final Intent exit = new Intent(getApplicationContext(), StartActivity.class);
@@ -272,21 +270,24 @@ public class GameActivity extends AppCompatActivity {
         View v_4x5 = findViewById(R.id.include_4x5);
         View v_4x6 = findViewById(R.id.include_4x6);
 
-        if(Level == 16) {
+        setLayout(Level, v_4x4, v_4x5, v_4x6);
+        setImages(level);
+    }
+
+    private void setLayout(int level, View v_4x4, View v_4x5, View v_4x6) {
+        if(level == 16) {
             v_4x4.setVisibility(View.VISIBLE);
             v_4x5.setVisibility(View.GONE);
             v_4x6.setVisibility(View.GONE);
-        } else if(Level == 20) {
+        } else if(level == 20) {
             v_4x4.setVisibility(View.GONE);
             v_4x5.setVisibility(View.VISIBLE);
             v_4x6.setVisibility(View.GONE);
-        } else if (Level == 24) {
+        } else if (level == 24) {
             v_4x4.setVisibility(View.GONE);
             v_4x5.setVisibility(View.GONE);
             v_4x6.setVisibility(View.VISIBLE);
         }
-
-        setImages(level);
     }
 
     private void setImages(int level) {
@@ -350,7 +351,6 @@ public class GameActivity extends AppCompatActivity {
             img_view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    System.out.println("### HALKO");
                     int card = Integer.parseInt((String) v.getTag());
                     showCard(img_view, card, arr);
                 }

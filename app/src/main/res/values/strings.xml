@@ -14,4 +14,6 @@
     <string name="one_player_mode_points">POINTS: 0</string>
     <string name="player_one_points">P1: 0</string>
     <string name="player_two_points">P2: 0</string>
+    <string name="new_game">NEW GAME</string>
+    <string name="exit_app">EXIT</string>
 </resources>
