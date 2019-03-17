@@ -16,4 +16,11 @@
     <string name="player_two_points">P2: 0</string>
     <string name="new_game">NEW GAME</string>
     <string name="exit_app">EXIT</string>
+    <string name="points">POINTS:</string>
+    <string name="p1_points">P1:</string>
+    <string name="p2_points">P2:</string>
+    <string name="empty_value" />
+    <string name="tries_number">Number of tries:</string>
+    <string name="level">level</string>
+    <string name="mode">mode</string>
 </resources>

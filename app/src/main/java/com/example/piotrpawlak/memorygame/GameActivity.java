@@ -28,7 +28,7 @@ public class GameActivity extends AppCompatActivity {
     ImageView iv_11, iv_12, iv_13, iv_14, iv_21, iv_22, iv_23, iv_24,
                     iv_31, iv_32, iv_33, iv_34, iv_41, iv_42, iv_43, iv_44;
 
-    Integer[] cardsArray = {101, 102, 103, 104, 105, 106, 107, 108, 201, 202, 203, 204, 205, 206, 207, 208};
+    Integer[] cardsArray = {101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 201, 202, 203, 204, 205, 206, 207, 208, 209, 210};
 
     int img101, img102, img103, img104, img105, img106, img107, img108;
     int img201, img202, img203, img204, img205, img206, img207, img208;
@@ -38,14 +38,17 @@ public class GameActivity extends AppCompatActivity {
 
     int turn = 1, p1_points = 0, p2_points = 0;
 
+    ImageView iv_11_4x5, iv_12_4x5, iv_13_4x5, iv_14_4x5, iv_21_4x5, iv_22_4x5, iv_23_4x5, iv_24_4x5,  iv_51_4x5, iv_52_4x5, iv_53_4x5, iv_54_4x5,
+            iv_31_4x5, iv_32_4x5, iv_33_4x5, iv_34_4x5, iv_41_4x5, iv_42_4x5, iv_43_4x5, iv_44_4x5;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        Level = Integer.parseInt(getIntent().getStringExtra("level"));
-        Mode = Integer.parseInt(getIntent().getStringExtra("mode"));
+        Level = Integer.parseInt(getIntent().getStringExtra(getString(R.string.level)));
+        Mode = Integer.parseInt(getIntent().getStringExtra(getString(R.string.mode)));
 
         setComponents(Level);
         setUpGame();
@@ -54,8 +57,7 @@ public class GameActivity extends AppCompatActivity {
         Collections.shuffle(Arrays.asList(cardsArray));
         player2.setTextColor(Color.GRAY);
 
-        ImageView[] img_arr = {iv_11, iv_12, iv_13, iv_14, iv_21, iv_22, iv_23, iv_24,
-                                    iv_31, iv_32, iv_33, iv_34, iv_41, iv_42, iv_43, iv_44};
+        ImageView[] img_arr = getImageArray();
         arr_img = img_arr;
         setImagesTags(Level);
         setClickAction(img_arr);
@@ -71,9 +73,9 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void showCard(ImageView iv, int card, ImageView[] img_arr) {
-        if (cardsArray[card] == 101 || cardsArray[card] == 201) {
+        if (cardsArray[card] == 101 || cardsArray[card] == 201 || cardsArray[card] == 109 || cardsArray[card] == 209) {
             iv.setImageResource(img101);
-        } else if (cardsArray[card] == 102 || cardsArray[card] == 202) {
+        } else if (cardsArray[card] == 102 || cardsArray[card] == 202 || cardsArray[card] == 110 || cardsArray[card] == 210) {
             iv.setImageResource(img102);
         } else if (cardsArray[card] == 103 || cardsArray[card] == 203) {
             iv.setImageResource(img103);
@@ -143,17 +145,17 @@ public class GameActivity extends AppCompatActivity {
         if (mode == 1) {
             if (cardNumber == 1) {
                 p1_points++;
-                player1.setText("POINTS: " + p1_points);
+                player1.setText(getString(R.string.points) + p1_points);
             }
 
         } else if (mode == 2) {
 
             if (turn == 1) {
                 p1_points++;
-                player1.setText("P1: " + p1_points);
+                player1.setText(getString(R.string.p1_points) + p1_points);
             } else if (turn == 2) {
                 p2_points++;
-                player2.setText("P2: " + p2_points);
+                player2.setText(getString(R.string.p2_points) + p2_points);
             }
         }
     }
@@ -164,7 +166,23 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
+    private void setCardTwins() {
+        if (Level == 20) {
+            if (first_card == 109) {
+                first_card = 101;
+            } else if (first_card == 110) {
+                first_card = 102;
+            } else if (second_card == 109) {
+                second_card = 101;
+            } else if (second_card == 110) {
+                second_card = 102;
+            }
+        }
+    }
+
     private void calculate(ImageView[] img_arr) {
+
+        setCardTwins();
 
         if (first_card == second_card) {
 
@@ -209,9 +227,20 @@ public class GameActivity extends AppCompatActivity {
         return !state.contains(Boolean.valueOf(false));
     }
 
+    private ImageView[] getImageArray() {
+        if (Level == 20) {
+            return new ImageView[]{iv_11_4x5, iv_12_4x5, iv_13_4x5, iv_14_4x5, iv_21_4x5, iv_22_4x5, iv_23_4x5, iv_24_4x5, iv_51_4x5, iv_52_4x5, iv_53_4x5, iv_54_4x5,
+                    iv_31_4x5, iv_32_4x5, iv_33_4x5, iv_34_4x5, iv_41_4x5, iv_42_4x5, iv_43_4x5, iv_44_4x5};
+        } else if (Level == 24) {
+            return null;
+        }
+
+        return new ImageView[]{iv_11, iv_12, iv_13, iv_14, iv_21, iv_22, iv_23, iv_24,
+                  iv_31, iv_32, iv_33, iv_34, iv_41, iv_42, iv_43, iv_44};
+    }
+
     private void checkWinner() {
-        ImageView[] img_arr = {iv_11, iv_12, iv_13, iv_14, iv_21, iv_22, iv_23, iv_24,
-                iv_31, iv_32, iv_33, iv_34, iv_41, iv_42, iv_43, iv_44};
+        ImageView[] img_arr = getImageArray();
 
         if(checkVisibility(img_arr)){
             AlertDialog.Builder winner = new AlertDialog.Builder(GameActivity.this);
@@ -222,8 +251,8 @@ public class GameActivity extends AppCompatActivity {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             final Intent new_game = new Intent(getApplicationContext(), GameActivity.class);
-                            new_game.putExtra("mode", String.valueOf(Mode));
-                            new_game.putExtra("level", String.valueOf(Level));
+                            new_game.putExtra(getString(R.string.mode), String.valueOf(Mode));
+                            new_game.putExtra(getString(R.string.level), String.valueOf(Level));
                             startActivity(new_game);
                         }
                     })
@@ -245,7 +274,7 @@ public class GameActivity extends AppCompatActivity {
         String winner_msg = getString(R.string.game_over) + " ";
 
         if (mode == 1) {
-            winner_msg += getString(R.string.winner) + "\n\nNumber of tries: " + gameBuilder.getCounter();
+            winner_msg += getString(R.string.winner) + "\n\n" + getString(R.string.tries_number) + gameBuilder.getCounter();
         } else {
             if(p1_points > p2_points) {
                 winner_msg += getString(R.string.player_one_win);
@@ -264,7 +293,7 @@ public class GameActivity extends AppCompatActivity {
         player2 = findViewById(R.id.txt_player2);
 
         player1.setText(Mode == 1 ? getString(R.string.one_player_mode_points) : getString(R.string.player_one_points));
-        player2.setText(Mode == 1 ? "" : getString(R.string.player_two_points));
+        player2.setText(Mode == 1 ? getString(R.string.empty_value) : getString(R.string.player_two_points));
 
         View v_4x4 = findViewById(R.id.include_4x4);
         View v_4x5 = findViewById(R.id.include_4x5);
@@ -291,25 +320,37 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void setImages(int level) {
-        iv_11 = findViewById(R.id.iv_11);
-        iv_12 = findViewById(R.id.iv_12);
-        iv_13 = findViewById(R.id.iv_13);
-        iv_14 = findViewById(R.id.iv_14);
+        iv_11 = findViewById(R.id.iv_11); iv_12 = findViewById(R.id.iv_12);
+        iv_13 = findViewById(R.id.iv_13); iv_14 = findViewById(R.id.iv_14);
 
-        iv_21 = findViewById(R.id.iv_21);
-        iv_22 = findViewById(R.id.iv_22);
-        iv_23 = findViewById(R.id.iv_23);
-        iv_24 = findViewById(R.id.iv_24);
+        iv_21 = findViewById(R.id.iv_21); iv_22 = findViewById(R.id.iv_22);
+        iv_23 = findViewById(R.id.iv_23); iv_24 = findViewById(R.id.iv_24);
 
-        iv_31 = findViewById(R.id.iv_31);
-        iv_32 = findViewById(R.id.iv_32);
-        iv_33 = findViewById(R.id.iv_33);
-        iv_34 = findViewById(R.id.iv_34);
+        iv_31 = findViewById(R.id.iv_31); iv_32 = findViewById(R.id.iv_32);
+        iv_33 = findViewById(R.id.iv_33); iv_34 = findViewById(R.id.iv_34);
 
-        iv_41 = findViewById(R.id.iv_41);
-        iv_42 = findViewById(R.id.iv_42);
-        iv_43 = findViewById(R.id.iv_43);
-        iv_44 = findViewById(R.id.iv_44);
+        iv_41 = findViewById(R.id.iv_41); iv_42 = findViewById(R.id.iv_42);
+        iv_43 = findViewById(R.id.iv_43); iv_44 = findViewById(R.id.iv_44);
+
+        setImages_4x5();
+    }
+
+    private void setImages_4x5() {
+        iv_11_4x5 = findViewById(R.id.iv_11_4x5); iv_13_4x5 = findViewById(R.id.iv_13_4x5);
+        iv_12_4x5 = findViewById(R.id.iv_12_4x5); iv_14_4x5 = findViewById(R.id.iv_14_4x5);
+
+        iv_21_4x5 = findViewById(R.id.iv_21_4x5); iv_23_4x5 = findViewById(R.id.iv_23_4x5);
+        iv_22_4x5 = findViewById(R.id.iv_22_4x5); iv_24_4x5 = findViewById(R.id.iv_24_4x5);
+
+        iv_31_4x5 = findViewById(R.id.iv_31_4x5); iv_33_4x5 = findViewById(R.id.iv_33_4x5);
+        iv_32_4x5 = findViewById(R.id.iv_32_4x5); iv_34_4x5 = findViewById(R.id.iv_34_4x5);
+
+        iv_41_4x5 = findViewById(R.id.iv_41_4x5); iv_43_4x5 = findViewById(R.id.iv_43_4x5);
+        iv_42_4x5 = findViewById(R.id.iv_42_4x5); iv_44_4x5 = findViewById(R.id.iv_44_4x5);
+
+        iv_51_4x5 = findViewById(R.id.iv_51_4x5); iv_53_4x5 = findViewById(R.id.iv_53_4x5);
+        iv_52_4x5 = findViewById(R.id.iv_52_4x5); iv_54_4x5 = findViewById(R.id.iv_54_4x5);
+
     }
 
     private void setImagesTags(int level) {
@@ -341,8 +382,6 @@ public class GameActivity extends AppCompatActivity {
         img206 = R.drawable.ic_image_106;
         img207 = R.drawable.ic_image_107;
         img208 = R.drawable.ic_image_108;
-
-
     }
 
     private void setClickAction(final ImageView[] arr) {
