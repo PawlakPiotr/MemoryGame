@@ -28,7 +28,7 @@ public class GameActivity extends AppCompatActivity {
     ImageView iv_11, iv_12, iv_13, iv_14, iv_21, iv_22, iv_23, iv_24,
                     iv_31, iv_32, iv_33, iv_34, iv_41, iv_42, iv_43, iv_44;
 
-    Integer[] cardsArray = {101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 201, 202, 203, 204, 205, 206, 207, 208, 209, 210};
+    Integer[] cardsArray;
 
     int img101, img102, img103, img104, img105, img106, img107, img108;
     int img201, img202, img203, img204, img205, img206, img207, img208;
@@ -49,6 +49,11 @@ public class GameActivity extends AppCompatActivity {
 
         Level = Integer.parseInt(getIntent().getStringExtra(getString(R.string.level)));
         Mode = Integer.parseInt(getIntent().getStringExtra(getString(R.string.mode)));
+
+        if (Level == 20)
+            cardsArray = new Integer[]{101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 201, 202, 203, 204, 205, 206, 207, 208, 209, 210};
+        else
+            cardsArray = new Integer[]{101, 102, 103, 104, 105, 106, 107, 108, 201, 202, 203, 204, 205, 206, 207, 208};
 
         setComponents(Level);
         setUpGame();
@@ -73,9 +78,9 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void showCard(ImageView iv, int card, ImageView[] img_arr) {
-        if (cardsArray[card] == 101 || cardsArray[card] == 201 || cardsArray[card] == 109 || cardsArray[card] == 209) {
+        if (cardsArray[card] == 101 || cardsArray[card] == 201 || cardsArray[card] == 109 || cardsArray[card] == 209 ) {
             iv.setImageResource(img101);
-        } else if (cardsArray[card] == 102 || cardsArray[card] == 202 || cardsArray[card] == 110 || cardsArray[card] == 210) {
+        } else if (cardsArray[card] == 102 || cardsArray[card] == 202 || cardsArray[card] == 210 || cardsArray[card] == 110) {
             iv.setImageResource(img102);
         } else if (cardsArray[card] == 103 || cardsArray[card] == 203) {
             iv.setImageResource(img103);
@@ -182,7 +187,16 @@ public class GameActivity extends AppCompatActivity {
 
     private void calculate(ImageView[] img_arr) {
 
-        setCardTwins();
+        //setCardTwins();
+        first_card = first_card == 109 ? 101 : first_card;
+        first_card = first_card == 110 ? 102 : first_card;
+
+
+        second_card = second_card == 109 ? 101 : second_card;
+        second_card = second_card == 110 ? 102 : second_card;
+
+        System.out.println("##### FIRST CARD => " + first_card);
+        System.out.println("##### SECOND CARD => " + second_card);
 
         if (first_card == second_card) {
 
@@ -231,8 +245,6 @@ public class GameActivity extends AppCompatActivity {
         if (Level == 20) {
             return new ImageView[]{iv_11_4x5, iv_12_4x5, iv_13_4x5, iv_14_4x5, iv_21_4x5, iv_22_4x5, iv_23_4x5, iv_24_4x5, iv_51_4x5, iv_52_4x5, iv_53_4x5, iv_54_4x5,
                     iv_31_4x5, iv_32_4x5, iv_33_4x5, iv_34_4x5, iv_41_4x5, iv_42_4x5, iv_43_4x5, iv_44_4x5};
-        } else if (Level == 24) {
-            return null;
         }
 
         return new ImageView[]{iv_11, iv_12, iv_13, iv_14, iv_21, iv_22, iv_23, iv_24,
@@ -297,25 +309,18 @@ public class GameActivity extends AppCompatActivity {
 
         View v_4x4 = findViewById(R.id.include_4x4);
         View v_4x5 = findViewById(R.id.include_4x5);
-        View v_4x6 = findViewById(R.id.include_4x6);
 
-        setLayout(Level, v_4x4, v_4x5, v_4x6);
+        setLayout(Level, v_4x4, v_4x5);
         setImages(level);
     }
 
-    private void setLayout(int level, View v_4x4, View v_4x5, View v_4x6) {
+    private void setLayout(int level, View v_4x4, View v_4x5) {
         if(level == 16) {
             v_4x4.setVisibility(View.VISIBLE);
             v_4x5.setVisibility(View.GONE);
-            v_4x6.setVisibility(View.GONE);
         } else if(level == 20) {
             v_4x4.setVisibility(View.GONE);
             v_4x5.setVisibility(View.VISIBLE);
-            v_4x6.setVisibility(View.GONE);
-        } else if (level == 24) {
-            v_4x4.setVisibility(View.GONE);
-            v_4x5.setVisibility(View.GONE);
-            v_4x6.setVisibility(View.VISIBLE);
         }
     }
 
