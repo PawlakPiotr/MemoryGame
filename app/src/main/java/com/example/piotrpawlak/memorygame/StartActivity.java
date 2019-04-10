@@ -41,7 +41,7 @@ public class StartActivity extends AppCompatActivity {
         btn_exit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                //finish();
                 System.exit(0);
             }
         });

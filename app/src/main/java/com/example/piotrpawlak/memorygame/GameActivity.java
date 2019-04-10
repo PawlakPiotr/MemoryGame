@@ -171,32 +171,13 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
-    private void setCardTwins() {
-        if (Level == 20) {
-            if (first_card == 109) {
-                first_card = 101;
-            } else if (first_card == 110) {
-                first_card = 102;
-            } else if (second_card == 109) {
-                second_card = 101;
-            } else if (second_card == 110) {
-                second_card = 102;
-            }
-        }
-    }
-
     private void calculate(ImageView[] img_arr) {
 
-        //setCardTwins();
         first_card = first_card == 109 ? 101 : first_card;
         first_card = first_card == 110 ? 102 : first_card;
 
-
         second_card = second_card == 109 ? 101 : second_card;
         second_card = second_card == 110 ? 102 : second_card;
-
-        System.out.println("##### FIRST CARD => " + first_card);
-        System.out.println("##### SECOND CARD => " + second_card);
 
         if (first_card == second_card) {
 
